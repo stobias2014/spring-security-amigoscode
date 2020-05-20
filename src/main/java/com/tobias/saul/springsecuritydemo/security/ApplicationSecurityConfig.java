@@ -27,8 +27,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 		//authorize any request made by client with basic auth
 		http
 			.authorizeRequests()
-			.antMatchers("/", "index", "/css/*", "/js/*")
-			.permitAll()
+			.antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+			.antMatchers("/api/**").hasRole(ApplicationUserRole.STUDENT.name())
 			.anyRequest()
 			.authenticated()
 			.and()
