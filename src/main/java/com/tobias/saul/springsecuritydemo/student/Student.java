@@ -19,6 +19,11 @@ public class Student {
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", name=" + name + "]";
+	}
+
 	
 	
 
