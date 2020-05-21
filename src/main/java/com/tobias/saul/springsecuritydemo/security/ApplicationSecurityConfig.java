@@ -14,6 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 //csrf automatically enabled with Spring Security
+//by default in memory database is used for session id
 
 @Configuration
 @EnableWebSecurity
@@ -48,7 +49,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 			.authenticated()
 			.and()
 			//.httpBasic()
-			.formLogin();
+			.formLogin()
+			.loginPage("/login").permitAll()
+			.defaultSuccessUrl("/courses", true);
 	}
 	
 	
