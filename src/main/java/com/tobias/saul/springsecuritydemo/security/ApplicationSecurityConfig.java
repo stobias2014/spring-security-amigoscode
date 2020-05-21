@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 //csrf automatically enabled with Spring Security
 //by default in memory database is used for session id
@@ -51,7 +50,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 			//.httpBasic()
 			.formLogin()
 			.loginPage("/login").permitAll()
-			.defaultSuccessUrl("/courses", true);
+			.defaultSuccessUrl("/courses", true)
+			.and()
+			.rememberMe(); //defaults to 2 weeks
 	}
 	
 	
