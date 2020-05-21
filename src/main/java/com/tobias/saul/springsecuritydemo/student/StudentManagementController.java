@@ -26,25 +26,28 @@ public class StudentManagementController {
 	@GetMapping
 	//annotation based
 	//hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority(''permission) hasAnyAuthority('permission')
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_ADMIN_TRAINEE')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMIN_TRAINEE')")
 	public List<Student> getAllStudents() {
 		System.out.println("getAllStudents requested");
 		return STUDENTS;
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('student:write')")
 	public void registerNewStudent(@RequestBody Student student) {
 		System.out.println("registeredNewStudent requested");
 		System.out.println("Student: " + student);
 	}
 	
 	@DeleteMapping("/{studentId}")
+	@PreAuthorize("hasAuthority('student:write')")
 	public void deleteStudent(@PathVariable("studentId") Long studentId) {
 		System.out.println("deleteStudent requested");
 		System.out.println("Student ID: " + studentId);
 	}
 	
 	@PutMapping("{studentId}")
+	@PreAuthorize("hasAuthority('student:write')")
 	public void updateStudent(@PathVariable("studentId") Long studentId, @RequestBody Student student) {
 		System.out.println("updateStudent requested");
 		System.out.println(String.format("Student ID: %s Student: %s", studentId, student));
